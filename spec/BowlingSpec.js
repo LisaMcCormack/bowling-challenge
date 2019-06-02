@@ -23,7 +23,26 @@ describe('Bowling', function() {
     bowling.roll(4);
     expect(bowling.sum1()).toEqual(5);
   });
-  // it('lets you roll two rolls,', function() {
-  //   expect((bowling.frame()).length).toEqual(2);
-  // });
+
+  it('will give the correct score if the player scores a spare', function() {
+    bowling.roll(5);
+    bowling.roll(5);
+    bowling.roll(5);
+    expect(bowling.sum1()).toEqual(15);
+  });
+
+  it('scores correctly for 3 strikes in a row', function() {
+    bowling.roll(10);
+    bowling.roll(10);
+    bowling.roll(10);
+    expect(bowling.sum1()).toEqual(30);
+  });
+
+  it('scores correctly for 2 strikes in a row', function() {
+    bowling.roll(10);
+    bowling.roll(10);
+    bowling.roll(5);
+    bowling.roll(2);
+    expect(bowling.sum1()).toEqual(27);
+  })
 });
