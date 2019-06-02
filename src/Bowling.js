@@ -3,10 +3,14 @@
 function Bowling(){
 
   this._scores = [];
+  var i = 0;
+  var n = 1;
+
 
   this.roll = function(num) {
     this._scores.push(num);
-    this.isStrike();
+    this.Strike();
+
   };
 
   this.scores = function() {
@@ -14,24 +18,51 @@ function Bowling(){
   };
 
   this.sum1 = function() {
-    if(this._scores[0] + this._scores[1] < 10) return this._scores[0] + this._scores[1];
-    if(this._scores[0] === 10 && this._scores[2] === 10 && this._scores[4] === 10 ) return 30;
-    if(this._scores[0] === 10 && this._scores[2] === 10 && this._scores[4] !== 10 ) return 20 + this._scores[4] + this._scores[5];
-    if(this._scores[0] + this._scores[1] === 10) return this._scores[0] + this._scores[1] + this._scores[2];
+    this.lessTen();
+    this.Spare();
+    this.threeStrikes();
+    this.twoStrikes();
   };
 
-  this.sum2 = function() {
-    if(this._scores[2] + this._scores[3] < 10) return this._scores[0] + this._scores[1];
-    if(this._scores[2] === 10 && this._scores[4] === 10 && this._scores[6] === 10 ) return 30;
-    if(this._scores[2] === 10 && this._scores[4] === 10 && this._scores[6] !== 10 ) return 20 + this._scores[6] + this._scores[7];
-    if(this._scores[2] + this._scores[3] === 10) return this._scores[2] + this._scores[3] + this._scores[4];
-  };
-
-  this.isStrike = function() {
-    var i = 0;
-    var n = 1;
+  this.Strike = function() {
     do {
       if(this._scores[i] === 10) this._scores[n] = "strike!";
+      i += 2;
+      n += 2;
+    }
+    while (i < 16);
+  };
+
+  this.Spare = function() {
+    do {
+      if(this._scores[i] + this._scores[i+1] === 10) return this._scores[i] + this._scores[i+1] + this._scores[i+2];
+      i += 2;
+      n += 2;
+    }
+    while (i < 16);
+  }
+
+  this.lessTen = function() {
+    do {
+      if(this._score[i] + this._score[i+1] < 10 ) return this._score[i] + this._score[i+1]
+      i += 2;
+      n += 2;
+    }
+    while (i < 16);
+  };
+
+  this.threeStrikes = function() {
+    do {
+      if(this._scores[i] === 10 && this._scores[i+2] === 10 && this._scores[i+4] === 10 ) return 30
+      i += 2;
+      n += 2;
+    }
+    while (i < 16);
+  };
+
+  this.twoStrikes = function() {
+    do {
+      if(this._scores[i] === 10 && this._scores[i+2] === 10 && this._scores[i+4] !== 10) return 20 + this._scores[i+4] + this._scores[i+5]
       i += 2;
       n += 2;
     }
